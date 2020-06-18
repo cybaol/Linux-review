@@ -88,14 +88,13 @@ int mypclose(FILE* fp)
     while (waitpid(pid, &stat, 0) < 0)
         if (errno != EINTR)
             return (-1); /* error other than EINTR rom waitpid() */
-
     return (stat); /* return child's termination status */
 }
 
 int main(int argc, char* argv[])
 {
     char buf[64];
-    FILE* fp = mypopen("cat ./a.txt", "r");
+    FILE* fp = mypopen("cat ./a.txt", argv[3]);
     fgets(buf, sizeof(buf), fp);
     printf("%s\n", buf);
     mypclose(fp);

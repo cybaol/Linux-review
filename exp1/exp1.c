@@ -18,13 +18,17 @@ FILE* mypopen(const char* command, const char* type)
         perror("fork");
         exit(EXIT_FAILURE);
     }
+    if (pipe(pfd) == -1) {
+        perror("pipe");
+        exit(EXIT_FAILURE);
+    }
     if (type[0] == 'r') {
         if (*children == 0) {
             if (close(pfd[0]) == -1) {
                 perror("r pfd[0] close");
                 exit(EXIT_FAILURE);
             }
-            /*dup2(pfd[1], STDOUT_FILENO | STDERR_FILENO);*/
+            dup2(pfd[1], STDOUT_FILENO | STDERR_FILENO);
             /*execl(SHELL, command);*/
             write(pfd[1], str, strlen(str));
             if (close(pfd[1]) == -1) {
@@ -73,10 +77,6 @@ FILE* mypopen(const char* command, const char* type)
 
 int main(int argc, char* argv[])
 {
-    if (pipe(pfd) == -1) {
-        perror("pipe");
-        exit(EXIT_FAILURE);
-    }
     FILE* fp = mypopen(argv[1], argv[2]);
     pclose(fp);
     while ((waitpid(*children, NULL, 0)) > 0) {

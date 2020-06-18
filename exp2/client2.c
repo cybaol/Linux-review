@@ -1,13 +1,12 @@
 #include "cliserv2.h"
 
-int flags;
+int flags, i = 0;
 
 void err_quit(const char*);
 
 int main(int argc, char** argv)
 {
-    umask(0);
-    int fd, i, nloop, nusec;
+    int fd, nloop, nusec;
     pid_t pid;
     char mesg[MESGSIZE];
     long offset;
@@ -49,7 +48,7 @@ int main(int argc, char** argv)
 	注意利用信号量同步的顺序
 
 	*/
-    for (i = 0; i < nloop; ++i) {
+    for (; i < nloop; ++i) {
         sleep(nusec);
         snprintf(mesg, MESGSIZE, "pid %d: message %d", pid, i);
         sem_trywait(&ptr->nempty);
@@ -61,7 +60,9 @@ int main(int argc, char** argv)
         }
         sem_wait(&ptr->mutex);
         offset = ptr->msgoff[i];
-        ptr->nput = (ptr->nput + 1) % MESGSIZE;
+        ptr->nput++;
+        if(ptr->nput >= MESGSIZE)
+            ptr->nput = 0;
         sem_post(&ptr->mutex);
         strcpy(&ptr->msgdata[offset], mesg);
         sem_post(&ptr->nstored);
