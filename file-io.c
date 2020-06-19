@@ -9,15 +9,11 @@
 char buffer[1000 + 5];
 int main(int argc, char* argv[])
 {
-    /*const int bufsize = atoi(argv[2]);*/
-    const char* str = "My ship is solid!";
-    int fd = open(argv[1], O_RDWR | O_CREAT | O_APPEND);
-    /*lseek(fd, 0, SEEK_END);*/
-    char* p = mmap(0, 100, PROT_READ, MAP_SHARED, fd, 0);
+    const char* str = "Hello World!";
+    int fd = open("a.txt", O_RDWR | O_CREAT);
+    lseek(fd, 0, SEEK_SET);
     write(fd, str, strlen(str));
-    int rdsize = read(fd, buffer, 1000);
-    if(rdsize == -1)
-        printf("read error");
+    read(fd, buffer, 1000);
     printf("%s\n", buffer);
     close(fd);
     return 0;
