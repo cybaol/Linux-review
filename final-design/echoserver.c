@@ -61,5 +61,5 @@ void Error_Func(char* ErrorMessage)
 {
     fputs(ErrorMessage, stderr);
     fputc('\n', stderr);
-    exit(EXIT_FAILURE);
+    exit(1);
 }

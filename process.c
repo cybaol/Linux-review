@@ -6,17 +6,17 @@
 
 int main(int argc, char* argv[])
 {
-    /*pid_t origin = getpid();*/
-    /*printf("origin = %d\n", origin);*/
+    /*pid_t parent = getpid();*/
+    /*printf("parent = %d\n", parent);*/
     /*pid_t pid = fork();*/
     /*if (pid < 0)*/
-        /*printf("error");*/
+    /*printf("error");*/
     /*else if (pid == 0) {*/
-        /*printf("I am subprocess\n");*/
-        /*printf("subpid = %d\n", getpid());*/
+    /*printf("I am subprocess\n");*/
+    /*printf("subpid = %d\n", getpid());*/
     /*} else {*/
-        /*printf("I am father of process\n");*/
-        /*printf("father pid = %d\n", getpid());*/
+    /*printf("I am father of process\n");*/
+    /*printf("father pid = %d\n", getpid());*/
     /*}*/
 
     int status;
