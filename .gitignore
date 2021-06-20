@@ -1,0 +1,17 @@
+/*
+
+!.gitignore
+
+!/*.c
+
+!/exp1/*.h
+!/exp1/*.c
+
+!/exp2/*.h
+!/exp2/*.c
+!/exp2/Makefile
+
+!/exp3/*.h
+!/exp3/*.c
+
+!/final-design/*.c

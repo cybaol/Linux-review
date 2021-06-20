@@ -14,4 +14,4 @@ server2:	server2.o
 	${CC} ${CFLAGS} -o $@ server2.c ${LIBS}
 
 clean:
-	rm -f ${PROGS} ${CLEANFIFES}
+	rm -f ${PROGS} client2.o server2.o
